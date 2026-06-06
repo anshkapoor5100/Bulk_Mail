@@ -1,0 +1,20 @@
+# Environment variables
+.env
+
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# IDE files
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Project-specific files
+jobs_data/data.xlsx
+resume/resume.pdf
