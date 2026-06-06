@@ -66,7 +66,7 @@ Rules:
 - DO NOT use any placeholders, variables, or brackets like {{recipient_name}}, [Hiring Manager], or [Company Name]. 
 - Do not include a recipient name. Start the email with a professional, generic greeting like "Hi Team," or "Dear Hiring Team,".
 - This is the final email ready to be sent—make it complete.
-- Keep under 250 words.
+- Keep under 150 words.
 - No markdown.
 - No code blocks.
 - No extra text.
