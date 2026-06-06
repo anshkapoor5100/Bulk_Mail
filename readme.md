@@ -12,3 +12,13 @@ pip install -r requirements.txt
 # run
 
 streamlit run app.py
+
+
+# .env file
+
+
+SENDER_EMAIL = "your email" 
+SENDER_PASSWORD = "16 digit token"
+
+MISTRAL_API_KEY = "api_key"
+HF_TOKEN= "hugging_face_token"
