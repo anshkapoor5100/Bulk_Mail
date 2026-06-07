@@ -41,6 +41,7 @@ prompt = ChatPromptTemplate.from_messages(
             "system",
             """
 You are helping me write a cold outreach email.
+Assume you to be {sender_name}
 
 Candidate Profile:
 --------------------
@@ -66,7 +67,7 @@ Rules:
 - DO NOT use any placeholders, variables, or brackets like {{recipient_name}}, [Hiring Manager], or [Company Name]. 
 - Do not include a recipient name. Start the email with a professional, generic greeting like "Hi Team," or "Dear Hiring Team,".
 - This is the final email ready to be sent—make it complete.
-- Keep under 150 words.
+- Keep under 200 words.
 - No markdown.
 - No code blocks.
 - No extra text.
@@ -153,29 +154,6 @@ def get_data(ctc_start, ctc_end, path, sender_name, phone_number):
         logger.error("Failed to load resume PDF: %s", str(e))
         raise
 
-    # 2. GENERATE PROFILE SUMMARY
-    logger.info("Generating candidate profile summary...")
-    profile_prompt = ChatPromptTemplate.from_template(
-        """
-        Summarize this resume into:
-
-        1. Education
-        2. Experience
-        3. Projects
-        4. Skills
-        5. Achievements
-
-        Keep it under 200 words.
-
-        Resume:
-        {resume}
-        """
-    )
-    
-    profile_chain = profile_prompt | llm
-    PROFILE = profile_chain.invoke({"resume": RESUME_CONTENT}).content
-    logger.info("Candidate profile generated (%d chars)", len(PROFILE))
-
 
     # 3. LOAD EXCEL & PROCESS EMAILS
     logger.info("Loading Excel file: %s", path)
@@ -215,7 +193,7 @@ def get_data(ctc_start, ctc_end, path, sender_name, phone_number):
             job_description=jd,
             sender_name=sender_name,
             phone_number=phone_number,
-            profile_text=PROFILE 
+            profile_text=RESUME_CONTENT 
         )
 
         subject, body = parse_response(response_text)
@@ -238,11 +216,11 @@ if __name__ == "__main__":
     logger.info("Starting pipeline")
 
     # Replace these strings with your actual details
-    MY_NAME = "Ansh Kapoor" 
-    MY_PHONE = "+91-XXXXXXXXXX" 
+    MY_NAME = "Prashans" 
+    MY_PHONE = "+91-8319293560" 
 
     result = get_data(
-        ctc_start=2500000,
+        ctc_start=00000,
         ctc_end=5000000,
         path="jobs_data/data.xlsx",
         sender_name=MY_NAME,
