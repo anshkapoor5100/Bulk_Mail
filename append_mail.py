@@ -2,6 +2,7 @@ import logging
 import time
 import pandas as pd
 import httpx
+from bs4 import BeautifulSoup
 
 from dotenv import load_dotenv
 
@@ -186,7 +187,11 @@ def get_data(ctc_start, ctc_end, path, sender_name, phone_number):
 
         logger.info("[%d/%d] %s | %s", idx, total, company, role)
 
-        jd = row.jobDescription if pd.notna(row.jobDescription) else ""
+        jd = (
+            BeautifulSoup(row.jobDescription, "html.parser").get_text(" ", strip=True)
+            if pd.notna(row.jobDescription)
+            else company
+        )
 
         # Generate the email, passing the profile generated earlier
         response_text = generate_email(
