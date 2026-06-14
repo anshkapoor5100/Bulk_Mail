@@ -29,7 +29,7 @@ load_dotenv()
 logger.info("Initializing Mistral model...")
 
 llm = ChatMistralAI(
-    model="mistral-small-latest",
+    model="mistral-medium-latest",
     temperature=0.3,
 )
 
